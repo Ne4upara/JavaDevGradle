@@ -27,30 +27,39 @@ jar {
     }
 }
 
-tasks.register('start') {
+
+
+def four = tasks.register('four') {
+    doLast {
+        println("Task 4, last. ")
+    }doFirst {
+        print("Task 4, first. -> ")
+    }
+}
+
+def tree = tasks.register('tree') {
         doFirst {
-            println("Start test Task build.gradle")
+            println("Task 3")
         }
 }
 
-tasks.register('reclining') {
-    dependsOn(start)
-    onlyIf {
-        print("Test.txt -> exists? -> ")
-        println file("src/main/resources/Test.txt").exists()
-    }
-}
-
-
-tasks.register('finish') {
-    dependsOn(reclining)
+def one = tasks.register('one')  {
     doLast {
-        println("BUILD.GRADLE")
-    }doFirst {
-        print("Finish test Task ")
+        println("Task 1. ")
     }
 }
 
+def two = tasks.register('two'){
+    doLast {
+        println("Task 2. ")
+    }
+}
+
+
+one.configure { mustRunAfter(four) }
+two.configure { dependsOn(two) }
+tree.configure { finalizedBy(four) }
+four.configure { shouldRunAfter(tree) }
 
 test {
     useJUnitPlatform()
