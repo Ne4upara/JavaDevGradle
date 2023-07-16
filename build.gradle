@@ -43,8 +43,11 @@ tasks.register('reclining') {
 
 
 tasks.register('finish') {
-    dependsOn(reclining) doLast {
-        println("Finish test Task build.gradle")
+    dependsOn(reclining)
+    doLast {
+        println("BUILD.GRADLE")
+    }doFirst {
+        print("Finish test Task ")
     }
 }
 
