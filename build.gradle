@@ -28,13 +28,12 @@ jar {
 }
 
 tasks.register('start') {
-    e ->
         doFirst {
-            println("Start compiling project")
+            println("Start test Task build.gradle")
         }
 }
 
-tasks.register('reclining') { e ->
+tasks.register('reclining') {
     dependsOn(start)
     onlyIf {
         print("Test.txt -> exists? ")
@@ -43,9 +42,9 @@ tasks.register('reclining') { e ->
 }
 
 
-tasks.register('finish') { e ->
+tasks.register('finish') {
     dependsOn(reclining) doLast {
-        println("Finish.")
+        println("Finish test Task build.gradle")
     }
 }
 
