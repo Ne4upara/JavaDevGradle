@@ -36,7 +36,7 @@ tasks.register('start') {
 tasks.register('reclining') {
     dependsOn(start)
     onlyIf {
-        print("Test.txt -> exists? ")
+        print("Test.txt -> exists? -> ")
         println file("src/main/resources/Test.txt").exists()
     }
 }
